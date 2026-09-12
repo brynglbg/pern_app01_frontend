@@ -25,11 +25,14 @@ import { useNotificationProvider } from "./components/refine-ui/notification/use
 import { Toaster } from "./components/refine-ui/notification/toaster";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 import "./App.css";
+import Dashboard from "./pages/dashboard";
+import { Home, IdCardIcon } from "lucide-react";
+import EmployeesList from "./pages/employees/list";
+import EmployeesCreate from "./pages/employees/create";
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ThemeProvider>
           <DevtoolsProvider>
@@ -42,9 +45,41 @@ function App() {
                 warnWhenUnsavedChanges: true,
                 projectId: "oHdrDa-frn3Fi-Zdr62R",
               }}
+              resources={[
+                {
+                  name: "dashboard",
+                  list: "/",
+                  meta: {
+                    label: "Dashboard",
+                    icon: <Home />,
+                    canDelete: false,
+                  },
+                },
+                {
+                  name: "employees",
+                  list: "/employees",
+                  create: "/employees/create",
+                  meta: {
+                    label: "Employees",
+                    icon: <IdCardIcon />,
+                  },
+                },
+              ]}
             >
               <Routes>
-                <Route index element={<WelcomePage />} />
+                <Route
+                  element={
+                    <Layout>
+                      <Outlet />
+                    </Layout>
+                  }
+                >
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/employees">
+                    <Route index element={<EmployeesList />} />
+                    <Route path="create" element={<EmployeesCreate />} />
+                  </Route>
+                </Route>
               </Routes>
               <Toaster />
               <RefineKbar />
