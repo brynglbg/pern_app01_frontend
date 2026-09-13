@@ -14,7 +14,6 @@ import routerProvider, {
   UnsavedChangesNotifier,
   DocumentTitleHandler,
 } from "@refinedev/react-router";
-import { dataProvider } from "./providers/data";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { ForgotPassword } from "./pages/forgot-password";
@@ -29,6 +28,7 @@ import Dashboard from "./pages/dashboard";
 import { Home, IdCardIcon } from "lucide-react";
 import EmployeesList from "./pages/employees/list";
 import EmployeesCreate from "./pages/employees/create";
+import { dataProvider } from "./providers/data";
 
 function App() {
   return (
